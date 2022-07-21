@@ -1,0 +1,14 @@
+<?php 
+
+
+function  my_autoloader($class){
+    $class = strtolower($class);
+    $the_path ="includes/{cass}.php";
+
+    if(file_exists($the_path)){
+        require_once($the_path);
+    }else{
+        die("This file name {$class}.php was not man....");
+    }
+}
+spl_autoload_register('my_autoloader');
