@@ -27,7 +27,7 @@ class Database
 
     public function query($sql)
     {
-        $result =   $this->connection->query($sql);
+        $result = $this->connection->query($sql);
         $this->confirm_query($result);
 
         return $result;
@@ -38,7 +38,7 @@ class Database
             die("Query Failed!" . $this->connection->error);
         }
     }
-    public function  escape_string($string)
+    public function escape_string($string)
     {
         $escaped_string = $this->connection->real_escape_string($string);
         return $escaped_string;
