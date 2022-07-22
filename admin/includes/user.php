@@ -29,6 +29,8 @@ class User
         //     return false;
         // }
         return !empty($the_result_array)? array_shift($the_result_array) : false; 
+
+         
         // return $found_user;
     }
 
@@ -42,6 +44,11 @@ class User
             $the_object_array[] = self::instantation($row);
         }
         return $the_object_array;
+    }
+
+    public static function verify_user(){
+        global $database;
+
     }
 
     public static function instantation($the_record)
