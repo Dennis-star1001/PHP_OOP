@@ -11,6 +11,15 @@ class Session
         $this->check_the_login();
     }
 
+public function message($msg=""){
+    if(!empty($msg)){
+        $_SESSION['message'] = $msg;
+    }else{
+        return $this->message;
+    }
+}
+
+
     public function is_signed_in()
     {
         return $this->signed_in;

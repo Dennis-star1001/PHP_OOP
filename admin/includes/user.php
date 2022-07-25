@@ -24,8 +24,6 @@ class User
 
         return !empty($the_result_array)? array_shift($the_result_array) : false; 
 
-         
-        // return $found_user;
     }
 
     public static function find_this_query($sql)
@@ -40,7 +38,7 @@ class User
         return $the_object_array;
     }
 
-    public static function verify_user(){
+    public static function verify_user($username, $password){
         global $database;
 
         $username = $database->escape_string($username);
