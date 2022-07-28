@@ -29,7 +29,7 @@ class Database
     {
         $result = $this->connection->query($sql);
         $this->confirm_query($result);
-
+        echo $this->confirm_query($result);
         return $result;
     }
     private function confirm_query($result)
@@ -45,7 +45,8 @@ class Database
     }
     public function the_insert_id()
     {
-        return $this->connection->insert_id;
+        // return $;
+        return mysqli_insert_id($this->connection);
     }
 }
 $database = new Database();

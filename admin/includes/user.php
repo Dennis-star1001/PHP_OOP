@@ -20,10 +20,9 @@ class User
     {
         global $database;
 
-     $the_result_array = self::find_this_query("SELECT * FROM users WHERE id = $user_id LIMIT 1");
+        $the_result_array = self::find_this_query("SELECT * FROM users WHERE id = $user_id LIMIT 1");
 
-        return !empty($the_result_array)? array_shift($the_result_array) : false; 
-
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
     }
 
     public static function find_this_query($sql)
@@ -38,7 +37,8 @@ class User
         return $the_object_array;
     }
 
-    public static function verify_user($username, $password){
+    public static function verify_user($username, $password)
+    {
         global $database;
 
         $username = $database->escape_string($username);
@@ -49,11 +49,10 @@ class User
         $sql .= "username = '{$username}' ";
         $sql .= "AND password = '{$password}' ";
         $sql .= "LIMIT 1";
-         
-     $the_result_array = self::find_this_query($sql);
 
-     return !empty($the_result_array)? array_shift($the_result_array) : false; 
+        $the_result_array = self::find_this_query($sql);
 
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
     }
 
     public static function instantation($the_record)
@@ -80,5 +79,51 @@ class User
         $object_properties = get_object_vars($this);
 
         return array_key_exists($the_attribute, $object_properties);
+    }
+
+    public function save(){
+        return isset($this->id) ? $this->update() : $this->create();
+    }
+
+    public function create()
+    {
+        global $database;
+
+        $sql = "INSERT INTO users (username, password, first_name, last_name)";
+        $sql .= "VALUES('";
+        $sql .= $database->escape_string($this->username) . "','";
+        $sql .= $database->escape_string($this->password) . "','";
+        $sql .= $database->escape_string($this->first_name) . "','";
+        $sql .= $database->escape_string($this->last_name) . "')";
+
+        if ($database->query($sql)) {
+            $this->id = $database->the_insert_id();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update(){
+        global $database;
+        $sql = "UPDATE users SET ";
+        $sql .= "username= '" . $database->escape_string($this->username)    . "', ";
+        $sql .= "password= '" . $database->escape_string($this->password)     . "', ";
+        $sql .= "first_name= '" . $database->escape_string($this->first_name) . "', ";
+        $sql .= "last_name= '" . $database->escape_string($this->last_name)   . "' ";
+        $sql .= " WHERE id= " . $database->escape_string($this->id);
+
+        $database->query($sql);
+
+        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
+    }
+
+    public function delete(){
+        global $database;
+        $sql = "DELETE FROM users WHERE ";
+        $sql .= "id =" . $database->escape_string($this->id);
+        $sql .= " LIMIT 1";
+        $database->query($sql);
+        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
     }
 }
