@@ -19,14 +19,20 @@
 
             // $user->create();
 
+            $user = User::find_user_by_id(2);
+            $user->username = "Johnny";
+            $user->password = "8888";
+            $user->first_name = "John";
+            $user->last_name = "Seye";
+            $user->update();
             
             // $user = User::find_user_by_id(2);
             // $user->delete();
 
 
    
-            $user = User::find_user_by_id(3);
-            $user->password = "qwwertyuops";
+            $user = User::find_user_by_id(1);
+            $user->password = "csc";
             $user->save();
 
             // $user = new User();
