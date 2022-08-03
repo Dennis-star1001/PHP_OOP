@@ -19,7 +19,11 @@
 
             // $user->create();
 
-            $user = User::find_user_by_id(2);
+            $users =  User::find_all();
+            foreach ($users as $user) {
+              echo $user->username;
+            }
+            $user = User::find_by_id(2);
             $user->username = "Johnny";
             $user->password = "8888";
             $user->first_name = "John";
@@ -31,7 +35,7 @@
 
 
    
-            $user = User::find_user_by_id(1);
+            $user = User::find_by_id(1);
             $user->password = "csc";
             $user->save();
 
