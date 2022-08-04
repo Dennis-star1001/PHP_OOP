@@ -19,31 +19,39 @@
 
             // $user->create();
 
-            $users =  User::find_all();
-            foreach ($users as $user) {
-              echo $user->username;
-            }
-            $user = User::find_by_id(2);
-            $user->username = "Johnny";
-            $user->password = "8888";
-            $user->first_name = "John";
-            $user->last_name = "Seye";
-            $user->update();
-            
+            // $users =  User::find_all();
+            // foreach ($users as $user) {
+            //   echo $user->username;
+
+            // }
+            // $user = User::find_by_id(2);
+            // $user->username = "Johnny";
+            // $user->password = "8888";
+            // $user->first_name = "John";
+            // $user->last_name = "Seye";
+            // $user->update();
+
             // $user = User::find_user_by_id(2);
             // $user->delete();
 
 
-   
-            $user = User::find_by_id(1);
-            $user->password = "csc";
+
+            $user = new User();
+            $user->username = "Johnny";
+            $user->password = "8888";
+            $user->first_name = "John";
+            $user->last_name = "Seye";
             $user->save();
 
             // $user = new User();
             // $user->password = "qwwertyuops";
             // $user->save();
 
+            $photos = Photo::find_all();
+            foreach ($photos as $photo) {
+              echo $photo->title;
 
+            }
 
             ?>
             <ol class="breadcrumb">
